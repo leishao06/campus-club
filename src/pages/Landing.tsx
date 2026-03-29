@@ -16,7 +16,7 @@ export default function Landing() {
     <div className="shell">
       <div className="hero">
         <p className="muted" style={{ marginBottom: "0.5rem" }}>
-          产品演示 · 基于 PRD 可交互原型啊啊啊
+          产品演示 · 基于 PRD 可交互原型
         </p>
         <h1>社团招新智能匹配平台</h1>
         <p className="muted" style={{ maxWidth: "36rem" }}>
