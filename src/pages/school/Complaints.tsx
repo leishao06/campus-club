@@ -5,24 +5,26 @@ export default function SchoolComplaints() {
 
   return (
     <div>
-      <h1>投诉与风控</h1>
-      <p className="muted">工单状态：已提交 → 处理中 → 已结案</p>
+      <header className="page-header">
+        <h1 className="page-title">投诉与舆情处理</h1>
+        <p className="page-lead">工单一般流程：已提交 — 处理中 — 已结案；全程留痕备查。</p>
+      </header>
 
-      <div className="stack" style={{ marginTop: "1rem" }}>
+      <div className="stack section-block">
         {complaints.map((c) => (
           <div key={c.id} className="card stack">
             <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
-              <strong>{c.title}</strong>
+              <strong className="text-body">{c.title}</strong>
               <span className="badge">{c.status}</span>
             </div>
-            <p className="muted" style={{ margin: 0 }}>
-              来自 {c.from} · 对象 {c.target} · {c.createdAt}
+            <p className="muted" style={{ margin: 0, fontSize: "0.875rem" }}>
+              来源 {c.from} · 涉及对象 {c.target} · {c.createdAt}
             </p>
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
               <button
                 type="button"
                 className="btn btn-secondary"
-                style={{ fontSize: "0.8rem" }}
+                style={{ fontSize: "0.8125rem" }}
                 onClick={() => updateComplaint(c.id, "processing")}
               >
                 受理
@@ -30,7 +32,7 @@ export default function SchoolComplaints() {
               <button
                 type="button"
                 className="btn btn-primary"
-                style={{ fontSize: "0.8rem" }}
+                style={{ fontSize: "0.8125rem" }}
                 onClick={() => updateComplaint(c.id, "closed")}
               >
                 结案

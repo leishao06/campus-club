@@ -14,58 +14,35 @@ export default function Landing() {
 
   return (
     <div className="shell">
-      <div className="hero">
-        <p className="muted" style={{ marginBottom: "0.5rem" }}>
-          产品演示 · 基于 PRD 可交互原型
-        </p>
-        <h1>社团招新智能匹配平台</h1>
-        <p className="muted" style={{ maxWidth: "36rem" }}>
-          兴趣测评、三层匹配模型、社团主页六模块、一键多投与进度追踪、社团与校方管理端——以下为前端演示数据，状态保存在本机浏览器。
-        </p>
-      </div>
+      <header className="page-header" style={{ marginBottom: "2rem" }}>
+        <h1 className="page-title">社团招新智能匹配平台</h1>
+        <p className="page-lead">兴趣测评与智能推荐、社团招新报名、校方招新监管的一体化服务入口。</p>
+      </header>
 
-      <div className="grid grid-3" style={{ marginTop: "2rem" }}>
-        <button
-          type="button"
-          className="card"
-          style={{ textAlign: "left", cursor: "pointer" }}
-          onClick={() => go("student")}
-        >
-          <div className="badge">C 端</div>
-          <h3 style={{ marginTop: "0.75rem" }}>新生端</h3>
-          <p className="muted">极速/深度测评、匹配结果、发现与筛选、档案投递、进度与对比</p>
+      <div className="portal-grid">
+        <button type="button" className="portal-card" onClick={() => go("student")}>
+          <span className="portal-role portal-role--student">学生</span>
+          <h2 className="portal-card-title">学生端</h2>
+          <p className="portal-card-desc">兴趣测评、匹配结果、社团检索与筛选、统一档案投递、报名进度查询</p>
         </button>
-        <button
-          type="button"
-          className="card"
-          style={{ textAlign: "left", cursor: "pointer" }}
-          onClick={() => go("club")}
-        >
-          <div className="badge" style={{ background: "#ccfbf1", color: "#0f766e" }}>
-            社团
-          </div>
-          <h3 style={{ marginTop: "0.75rem" }}>社团管理端</h3>
-          <p className="muted">招新看板、报名列表、录取操作、数据概览</p>
+        <button type="button" className="portal-card" onClick={() => go("club")}>
+          <span className="portal-role portal-role--club">社团</span>
+          <h2 className="portal-card-title">社团管理端</h2>
+          <p className="portal-card-desc">招新工作台、报名审核、考核与录取、招新数据统计</p>
         </button>
-        <button
-          type="button"
-          className="card"
-          style={{ textAlign: "left", cursor: "pointer" }}
-          onClick={() => go("school")}
-        >
-          <div className="badge" style={{ background: "#fef3c7", color: "#b45309" }}>
-            校方
-          </div>
-          <h3 style={{ marginTop: "0.75rem" }}>校方 / 社联</h3>
-          <p className="muted">全校数据大屏、招新季规则、投诉工单处理</p>
+        <button type="button" className="portal-card" onClick={() => go("school")}>
+          <span className="portal-role portal-role--school">校方</span>
+          <h2 className="portal-card-title">校方监管端</h2>
+          <p className="portal-card-desc">全校招新数据、招新季规则、内容审核与投诉处理</p>
         </button>
       </div>
 
-      <p style={{ marginTop: "2rem" }}>
-        <button type="button" className="btn btn-ghost" onClick={resetDemo}>
-          清除本地演示数据
+      <footer className="landing-footer">
+        <p className="landing-footer-note">如需清空本设备已填写的测评与报名记录，可使用下方操作。</p>
+        <button type="button" className="btn btn-ghost" style={{ marginTop: "0.35rem", paddingLeft: 0 }} onClick={resetDemo}>
+          清除本地数据
         </button>
-      </p>
+      </footer>
     </div>
   );
 }

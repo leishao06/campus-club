@@ -24,32 +24,48 @@ function stepIndex(s: ApplicationStatus): number {
   return i < 0 ? 0 : i;
 }
 
+const statusLabel: Record<ApplicationStatus, string> = {
+  submitted: "已投递，待社团受理",
+  accepted: "社团已受理",
+  written: "请按要求完成笔试",
+  interview: "请参加面试或预约面试时段",
+  pending: "评审中，待录取结果",
+  rejected: "本轮未录取",
+};
+
 export default function Applications() {
   const { applications } = useApp();
 
   return (
     <div>
-      <h1>我的报名</h1>
-      <p className="muted">全节点进度为演示状态；真实环境将对接消息推送。</p>
+      <header className="page-header">
+        <h1 className="page-title">我的报名</h1>
+        <p className="page-lead">查看各志愿的处理进度；关键节点将通过系统消息进行通知。</p>
+      </header>
 
       {applications.length === 0 ? (
-        <p>
-          暂无投递。<Link to="/student/discover">去发现</Link>
+        <p className="text-body">
+          暂无报名记录。
+          <Link to="/student/discover" className="link-inline" style={{ marginLeft: "0.35rem" }}>
+            前往社团检索
+          </Link>
         </p>
       ) : (
-        <div className="stack" style={{ marginTop: "1rem" }}>
+        <div className="stack section-block">
           {applications.map((app) => {
             const idx = stepIndex(app.status);
             return (
               <div key={app.id} className="card stack">
                 <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
                   <div>
-                    <strong>{app.clubName}</strong>
+                    <strong className="text-body">{app.clubName}</strong>
                     <span className="muted" style={{ marginLeft: "0.5rem" }}>
-                      投递 {app.submittedAt} · 匹配 {app.matchScore}%
+                      投递日期 {app.submittedAt} · 系统评估匹配度 {app.matchScore}%
                     </span>
                   </div>
-                  <Link to={`/student/club/${app.clubId}`}>社团主页</Link>
+                  <Link to={`/student/club/${app.clubId}`} className="link-inline">
+                    社团主页
+                  </Link>
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", alignItems: "center" }}>
                   {STEPS.map((st, i) => (
@@ -68,23 +84,8 @@ export default function Applications() {
                     </span>
                   ))}
                 </div>
-                <p className="muted" style={{ margin: 0, fontSize: "0.85rem" }}>
-                  当前状态：
-                  <strong>
-                    {app.status === "submitted"
-                      ? "已投递，等待社团受理"
-                      : app.status === "accepted"
-                        ? "社团已受理"
-                        : app.status === "written"
-                          ? "请完成笔试"
-                          : app.status === "interview"
-                            ? "请预约/参加面试"
-                            : app.status === "pending"
-                              ? "待录取结果"
-                              : app.status === "rejected"
-                                ? "未录取"
-                                : app.status}
-                  </strong>
+                <p className="muted" style={{ margin: 0, fontSize: "0.875rem" }}>
+                  当前状态：{statusLabel[app.status]}
                 </p>
               </div>
             );

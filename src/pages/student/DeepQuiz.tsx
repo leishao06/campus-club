@@ -33,37 +33,52 @@ export default function DeepQuiz() {
 
   return (
     <div>
-      <h1>深度测评（约 2 分钟）</h1>
-      <p className="muted">补充信息后，匹配结果会重新排序并生成更细的推荐理由。</p>
+      <header className="page-header">
+        <h1 className="page-title">深度测评</h1>
+        <p className="page-lead">预计用时约 2 分钟。提交后将结合极速测评结果，重新排序并生成更细的匹配说明。</p>
+      </header>
 
-      <form onSubmit={submit} className="card stack" style={{ marginTop: "1.25rem" }}>
+      <form onSubmit={submit} className="card stack" style={{ marginTop: "0.25rem" }}>
         <div className="field">
-          <label>特长与技能</label>
+          <label className="form-question" htmlFor="d-skills">
+            特长与技能
+          </label>
+          <p className="form-hint">选填，用于加权匹配</p>
           <textarea
+            id="d-skills"
             value={form.skills}
             onChange={(e) => setForm((f) => ({ ...f, skills: e.target.value }))}
-            placeholder="如：Pr 剪辑、Python、主持…"
+            placeholder="例如：视频剪辑、Python、播音主持"
           />
         </div>
         <div className="field">
-          <label>过往相关经历</label>
+          <label className="form-question" htmlFor="d-exp">
+            相关经历
+          </label>
           <textarea
+            id="d-exp"
             value={form.experience}
             onChange={(e) => setForm((f) => ({ ...f, experience: e.target.value }))}
-            placeholder="如：高中文学社、志愿活动…"
+            placeholder="例如：校级媒体实习、志愿服务经历"
           />
         </div>
         <div className="field">
-          <label>职业规划（简答）</label>
+          <label className="form-question" htmlFor="d-career">
+            学业或职业规划（简答）
+          </label>
           <textarea
+            id="d-career"
             value={form.career}
             onChange={(e) => setForm((f) => ({ ...f, career: e.target.value }))}
-            placeholder="如：希望从事产品/媒体/科研…"
+            placeholder="例如：希望从事新媒体、科研或公共服务相关方向"
           />
         </div>
         <div className="field">
-          <label>性格倾向</label>
+          <label className="form-question" htmlFor="d-personality">
+            性格倾向
+          </label>
           <select
+            id="d-personality"
             value={form.personality}
             onChange={(e) =>
               setForm((f) => ({
@@ -72,14 +87,17 @@ export default function DeepQuiz() {
               }))
             }
           >
-            <option value="outgoing">外向协作</option>
+            <option value="outgoing">偏外向、协作</option>
             <option value="balanced">均衡</option>
-            <option value="calm">安静深耕</option>
+            <option value="calm">偏内敛、专注</option>
           </select>
         </div>
         <div className="field">
-          <label>本学期愿投入的社团时间（小时/周）：{form.budgetHours}</label>
+          <label className="form-question" htmlFor="d-range">
+            本学期可投入社团的时间（约 {form.budgetHours} 小时/周）
+          </label>
           <input
+            id="d-range"
             type="range"
             min={1}
             max={12}
@@ -87,12 +105,12 @@ export default function DeepQuiz() {
             onChange={(e) => setForm((f) => ({ ...f, budgetHours: Number(e.target.value) }))}
           />
         </div>
-        <div style={{ display: "flex", gap: "0.75rem" }}>
+        <div className="primary-actions">
           <button type="submit" className="btn btn-primary">
-            更新匹配方案
+            提交并更新匹配结果
           </button>
           <Link to="/student/quiz" className="btn btn-secondary">
-            先去极速测评
+            返回极速测评
           </Link>
         </div>
       </form>

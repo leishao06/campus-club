@@ -33,7 +33,7 @@ interface Persisted {
 }
 
 const defaultProfile: StudentProfile = {
-  name: "演示新生",
+  name: "张三",
   studentId: "2026000001",
   phone: "13800000000",
   email: "demo@univ.edu.cn",

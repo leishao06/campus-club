@@ -362,3 +362,5 @@
 ---
 
 **— 文档结束 —**
+npm install
+npm run dev

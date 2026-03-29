@@ -10,35 +10,40 @@ export default function Compare() {
     .filter((c): c is Club => Boolean(c));
 
   const rows: { label: string; get: (c: Club) => string }[] = [
-    { label: "周投入(小时/周)", get: (c) => String(c.weeklyHours) },
+    { label: "周投入（小时/周）", get: (c) => String(c.weeklyHours) },
     { label: "零基础友好", get: (c) => (c.beginnerFriendly ? "是" : "否") },
-    { label: "会费", get: (c) => (c.recruitment.fee === 0 ? "无" : `${c.recruitment.fee} 元/年`) },
+    { label: "会费", get: (c) => (c.recruitment.fee === 0 ? "无" : `${c.recruitment.fee} 元/学年`) },
     {
-      label: "考核",
+      label: "考核方式",
       get: (c) =>
         c.recruitment.assessment === "none"
           ? "无"
           : c.recruitment.assessment === "both"
-            ? "笔试+面试"
+            ? "笔试与面试"
             : c.recruitment.assessment === "written"
               ? "笔试"
               : "面试",
     },
-    { label: "二课学分", get: (c) => (c.recruitment.credits ? "可认定" : "无") },
+    { label: "第二课堂学分", get: (c) => (c.recruitment.credits ? "可认定" : "无") },
     { label: "报名截止", get: (c) => c.deadline },
   ];
 
   return (
     <div>
-      <h1>社团对比</h1>
-      <p className="muted">最多 3 个社团；在社团详情页可加入/移出。</p>
+      <header className="page-header">
+        <h1 className="page-title">志愿对比</h1>
+        <p className="page-lead">最多添加三个社团；可在各社团主页加入或移出对比清单。</p>
+      </header>
 
       {clubs.length === 0 ? (
-        <p>
-          清单为空。<Link to="/student/discover">去发现</Link>
+        <p className="text-body">
+          当前对比清单为空。
+          <Link to="/student/discover" className="link-inline" style={{ marginLeft: "0.35rem" }}>
+            前往社团检索
+          </Link>
         </p>
       ) : (
-        <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }} className="section-block">
           <table
             style={{
               width: "100%",
@@ -46,23 +51,23 @@ export default function Compare() {
               minWidth: 520,
               background: "var(--surface)",
               border: "1px solid var(--border)",
-              borderRadius: "var(--radius)",
+              borderRadius: "var(--radius-lg)",
               boxShadow: "var(--shadow)",
             }}
           >
             <thead>
               <tr style={{ borderBottom: "1px solid var(--border)" }}>
-                <th style={{ textAlign: "left", padding: "0.65rem" }}>维度</th>
+                <th style={{ textAlign: "left", padding: "0.75rem", fontSize: "0.8125rem", color: "var(--muted)" }}>对比项</th>
                 {clubs.map((c) => (
-                  <th key={c.id} style={{ padding: "0.65rem", fontSize: "0.9rem", verticalAlign: "top" }}>
+                  <th key={c.id} style={{ padding: "0.75rem", fontSize: "0.9375rem", verticalAlign: "top", fontWeight: 700 }}>
                     {c.name}
                     <button
                       type="button"
                       className="btn btn-ghost"
-                      style={{ fontSize: "0.7rem", display: "block", margin: "0.35rem auto 0" }}
+                      style={{ fontSize: "0.75rem", display: "block", margin: "0.35rem auto 0", padding: 0 }}
                       onClick={() => toggleCompare(c.id)}
                     >
-                      移除
+                      移出
                     </button>
                   </th>
                 ))}
@@ -71,9 +76,11 @@ export default function Compare() {
             <tbody>
               {rows.map((row) => (
                 <tr key={row.label} style={{ borderBottom: "1px solid var(--border)" }}>
-                  <td style={{ padding: "0.55rem", color: "var(--muted)", fontSize: "0.88rem" }}>{row.label}</td>
+                  <td style={{ padding: "0.6rem 0.75rem", color: "var(--text-secondary)", fontSize: "0.875rem", fontWeight: 600 }}>
+                    {row.label}
+                  </td>
                   {clubs.map((c) => (
-                    <td key={c.id} style={{ padding: "0.55rem", fontSize: "0.88rem" }}>
+                    <td key={c.id} style={{ padding: "0.6rem 0.75rem", fontSize: "0.875rem" }}>
                       {row.get(c)}
                     </td>
                   ))}

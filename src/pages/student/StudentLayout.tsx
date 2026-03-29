@@ -3,9 +3,9 @@ import { useApp } from "@/context/AppContext";
 
 const links = [
   { to: "/student/home", label: "首页" },
-  { to: "/student/quiz", label: "测评" },
+  { to: "/student/quiz", label: "极速测评" },
   { to: "/student/match", label: "匹配结果" },
-  { to: "/student/discover", label: "发现" },
+  { to: "/student/discover", label: "社团检索" },
   { to: "/student/applications", label: "我的报名" },
   { to: "/student/compare", label: "对比" },
   { to: "/student/profile", label: "档案" },
@@ -28,7 +28,7 @@ export default function StudentLayout() {
       <header className="topbar">
         <NavLink to="/student/home" className="brand-mark">
           <span className="brand-dot" />
-          社团招新匹配
+          学生端 · 招新服务
         </NavLink>
         <nav className="nav">
           {links.map((l) => (

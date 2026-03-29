@@ -9,40 +9,54 @@ export default function Profile() {
 
   return (
     <div>
-      <h1>通用档案</h1>
-      <p className="muted">一份档案可投递多个社团，最多 5 个；信息仅用于招新演示。</p>
+      <header className="page-header">
+        <h1 className="page-title">统一报名档案</h1>
+        <p className="page-lead">同一份档案可向多个社团投递报名，最多五个；提交前请核对信息与联系方式。</p>
+      </header>
 
       <form
         className="card stack"
-        style={{ marginTop: "1rem" }}
+        style={{ marginTop: "0.25rem" }}
         onSubmit={(e) => {
           e.preventDefault();
-          alert("已保存");
+          alert("档案已保存");
         }}
       >
         <div className="field">
-          <label>姓名</label>
-          <input value={profile.name} onChange={(e) => update("name", e.target.value)} required />
+          <label className="form-question" htmlFor="p-name">
+            姓名
+          </label>
+          <input id="p-name" value={profile.name} onChange={(e) => update("name", e.target.value)} required />
         </div>
         <div className="field">
-          <label>学号</label>
-          <input value={profile.studentId} onChange={(e) => update("studentId", e.target.value)} required />
+          <label className="form-question" htmlFor="p-id">
+            学号
+          </label>
+          <input id="p-id" value={profile.studentId} onChange={(e) => update("studentId", e.target.value)} required />
         </div>
         <div className="field">
-          <label>手机</label>
-          <input value={profile.phone} onChange={(e) => update("phone", e.target.value)} />
+          <label className="form-question" htmlFor="p-phone">
+            手机号码
+          </label>
+          <input id="p-phone" value={profile.phone} onChange={(e) => update("phone", e.target.value)} />
         </div>
         <div className="field">
-          <label>邮箱</label>
-          <input type="email" value={profile.email} onChange={(e) => update("email", e.target.value)} />
+          <label className="form-question" htmlFor="p-email">
+            电子邮箱
+          </label>
+          <input id="p-email" type="email" value={profile.email} onChange={(e) => update("email", e.target.value)} />
         </div>
         <div className="field">
-          <label>兴趣特长</label>
-          <input value={profile.talents} onChange={(e) => update("talents", e.target.value)} />
+          <label className="form-question" htmlFor="p-talents">
+            兴趣特长
+          </label>
+          <input id="p-talents" value={profile.talents} onChange={(e) => update("talents", e.target.value)} />
         </div>
         <div className="field">
-          <label>自我介绍</label>
-          <textarea value={profile.bio} onChange={(e) => update("bio", e.target.value)} />
+          <label className="form-question" htmlFor="p-bio">
+            自我介绍
+          </label>
+          <textarea id="p-bio" value={profile.bio} onChange={(e) => update("bio", e.target.value)} placeholder="简要说明个人经历与加入社团的期望" />
         </div>
         <button type="submit" className="btn btn-primary">
           保存档案

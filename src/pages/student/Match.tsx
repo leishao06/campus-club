@@ -7,10 +7,12 @@ export default function Match() {
   if (!quickQuiz) {
     return (
       <div>
-        <h1>匹配结果</h1>
-        <p className="muted">请先完成极速测评。</p>
+        <header className="page-header">
+          <h1 className="page-title">匹配结果</h1>
+          <p className="page-lead">请先完成极速测评，系统将生成推荐列表。</p>
+        </header>
         <Link to="/student/quiz" className="btn btn-primary">
-          去测评
+          前往极速测评
         </Link>
       </div>
     );
@@ -18,15 +20,20 @@ export default function Match() {
 
   return (
     <div>
-      <h1>匹配结果</h1>
-      <p className="muted">{filterExplain}</p>
+      <header className="page-header">
+        <h1 className="page-title">匹配结果</h1>
+        <p className="page-lead">{filterExplain}</p>
+      </header>
 
       {filteredOut.length > 0 && (
-        <details className="card" style={{ marginTop: "1rem" }}>
-          <summary style={{ cursor: "pointer", fontWeight: 600 }}>
-            因硬性条件未进入列表的社团（{filteredOut.length}）
+        <details className="card" style={{ marginTop: "0.5rem" }}>
+          <summary style={{ cursor: "pointer", fontWeight: 600, fontSize: "0.9375rem" }}>
+            未纳入本列表的社团（{filteredOut.length}）
           </summary>
-          <ul className="muted" style={{ marginTop: "0.75rem" }}>
+          <p className="form-hint" style={{ marginTop: "0.65rem" }}>
+            以下社团因与您在测评中勾选的硬性条件不符，已从推荐中排除。
+          </p>
+          <ul className="muted" style={{ margin: "0.5rem 0 0", paddingLeft: "1.2rem" }}>
             {filteredOut.map(({ club, reason }) => (
               <li key={club.id}>
                 <strong>{club.name}</strong>：{reason}
@@ -36,28 +43,35 @@ export default function Match() {
         </details>
       )}
 
-      <div className="stack" style={{ marginTop: "1.25rem" }}>
+      <div className="stack section-block">
         {matchResults.map(({ club, score, reason }) => (
           <article key={club.id} className="card stack">
-            <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap", alignItems: "flex-start" }}>
               <div>
                 <span className="badge">{club.categoryLabel}</span>
-                <h2 style={{ fontSize: "1.15rem", marginTop: "0.5rem" }}>{club.name}</h2>
+                <h2 className="section-title" style={{ marginTop: "0.5rem", fontSize: "1.0625rem" }}>
+                  {club.name}
+                </h2>
                 <p className="muted" style={{ margin: 0 }}>
-                  匹配度 <strong style={{ color: "var(--brand)" }}>{score}%</strong> · 热度 {club.heat}
+                  匹配度 <strong style={{ color: "var(--brand)" }}>{score}%</strong>
+                  <span style={{ marginLeft: "0.5rem" }}>关注度 {club.heat}</span>
                 </p>
               </div>
               <Link to={`/student/club/${club.id}`} className="btn btn-primary">
-                查看主页
+                查看社团主页
               </Link>
             </div>
-            <p style={{ margin: 0, fontSize: "0.95rem" }}>{reason}</p>
+            <p className="text-body" style={{ margin: 0 }}>
+              {reason}
+            </p>
           </article>
         ))}
       </div>
 
-      <p style={{ marginTop: "1.5rem" }}>
-        <Link to="/student/discover">在发现页继续筛选 →</Link>
+      <p className="section-block" style={{ marginTop: "1.5rem" }}>
+        <Link to="/student/discover" className="link-inline">
+          进入社团检索与筛选
+        </Link>
       </p>
     </div>
   );
